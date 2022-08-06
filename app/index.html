@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Loading DragonMessenger</title>
+</head>
+<body>
+    <div id="root">
+        <!-- Messenger UI -->
+        <!-- Messages, username, send message btn -->
+        <div class="loggedAsBox">
+            <h1>Logged as <input type="text" maxlength="16" id="username" placeholder="Username"></input></h1>
+            <h2>{{ ONLINE_STATUS }} | {{ ROLE_NAME }}</h2>
+        </div>
+        <div id="messages"></div>
+        <input id="sendMessageBox" type="text"></input>
+    </div>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/main.js"></script>
+</body>
+</html>
