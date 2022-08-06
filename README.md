@@ -11,9 +11,13 @@ That's done!
 
 ``python main.py``
 
-## Unsupported:
-:x: | This methods currently **not supported**
+## Methods to host:
+:white_check_mark: | Supported:
+ - Self-hosting
 
-Unsupported:
+:warning: | Supported, but **with issues**:
+ - Replit (Works, but some rate limits, and issues with JS)
+ 
+:x: | Unsupported:
  - Heroku
  - Docker
