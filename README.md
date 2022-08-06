@@ -13,3 +13,6 @@ That's done!
 
 ## With docker
 :x: | Soon, but currently **not supported**
+
+## Heroku
+:warning: | Support is add but **not tested**
