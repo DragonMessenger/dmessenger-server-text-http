@@ -11,8 +11,9 @@ That's done!
 
 ``python main.py``
 
-## With docker
-:x: | Soon, but currently **not supported**
+## Unsupported:
+:x: | This methods currently **not supported**
 
-## Heroku
-:warning: | Support is add but **not tested**
+Unsupported:
+ - Heroku
+ - Docker
