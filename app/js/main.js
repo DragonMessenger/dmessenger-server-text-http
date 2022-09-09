@@ -2,12 +2,24 @@ console.log("[Core] Loading...")
 document.title = "Booting DragonMessenger Core..."
 
 var xhttp = new XMLHttpRequest();
-window.WEBAPP_ENDPOINT = 'https://dragonmessenger-1.dragonfire0159x.repl.co';
+window.WEBAPP_ENDPOINT = 'http://127.0.0.1';
 var chat = document.getElementById("messages");
 
 function sendMessange(message) {
     var username = document.getElementById("username").value;
     var message = document.getElementById("sendMessageBox").value;
+    if (message.startsWith('/')) {
+        if (message == "/reload") {
+            window.location.reload();
+        }
+        if (message.startsWith('/title ')) {
+            var message = document.getElementById("sendMessageBox").value;
+            var title = message.replace("/title ", "");
+            document.title = title;
+        }
+        return;
+    }
+
     if (message == "") {
         return;
     }
@@ -97,6 +109,7 @@ console.log("[Chat] Loading code for input...")
 document.getElementById("sendMessageBox").onkeydown = function(e) {
     if (e.keyCode == 13) {
         sendMessange();
+        document.getElementById('files').innerHTML = "";
         document.getElementById("sendMessageBox").value = "";
     }
 }
@@ -108,4 +121,77 @@ document.title = "DragonMessenger"
 
 window.onload = function() {
     getMessages();
+}
+
+function dropHandler(ev) {
+	console.log('File(s) dropped');
+	document.getElementById('dragAndDropDialog').hidden = true;
+
+	let uploadedCount = document.getElementById('files').childNodes.length - 1;
+
+	if (uploadedCount > 8) {
+        document.getElementById('cantUploadMore').hidden = false;
+        setTimeout(() => document.getElementById('cantUploadMore').hidden = true, 5000)
+        ev.preventDefault();
+		return;
+    }
+
+	// Prevent default behavior (Prevent file from being opened)
+	ev.preventDefault();
+
+	if (ev.dataTransfer.items) {
+		// Use DataTransferItemList interface to access the file(s)
+		[...ev.dataTransfer.items].forEach((item, i) => {
+			// If dropped items aren't files, reject them
+			if (item.kind === 'file') {
+				const file = item.getAsFile();
+				document.getElementById('files').innerHTML = document.getElementById('files').innerHTML + `<h2 id="${file.name}"><a onclick="removeFile('${file.name}');">X</a> | ${file.name}</h2>`;
+				console.log(`… file[${i}].name = ${file.name}`);
+			}
+		});
+	} else {
+		// Use DataTransfer interface to access the file(s)
+		[...ev.dataTransfer.files].forEach((file, i) => {
+			console.log(`… file[${i}].name = ${file.name}`);
+		});
+	}
+}
+
+function dragOverHandler(ev) {
+	console.log('File(s) in drop zone');
+
+	document.getElementById('dragAndDropDialog').hidden = false;
+
+	// Prevent default behavior (Prevent file from being opened)
+	ev.preventDefault();
+}
+
+function dragExit() {
+	console.log('dragExit');
+	document.getElementById('dragAndDropDialog').hidden = true;
+}
+
+function removeFile(file) {
+    document.getElementById(file).remove();
+}
+
+//document.oncontextmenu = function() {return false;};
+
+var context_menu = document.getElementById('context-menu');
+document.addEventListener('contextmenu', function(e) {
+    var ev = window.event || e;
+    // pageX: расстояние между текущим положением мыши и левой стороной страницы
+    // pageY: расстояние от текущей позиции курсора мыши до верха страницы
+    // clientX: расстояние между текущей позицией мыши и левой стороной видимого окна
+    // clientY: расстояние между текущей позицией мыши и верхней частью видимого окна
+    var x = ev.pageX;
+    var y = ev.pageY;
+    context_menu.style.left = x + 'px';
+    context_menu.style.top = y + 'px';
+    context_menu.hidden = false;
+    // Предотвращаем поведение по умолчанию
+    ev.preventDefault();
+})
+document.onclick = function() {
+    context_menu.hidden = true;
 }

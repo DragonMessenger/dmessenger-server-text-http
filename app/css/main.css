@@ -24,6 +24,45 @@ input {
     color: white;
 }
 
+#dragAndDropArea {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+#cantUploadMore {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+#cantUploadMoreDialog {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 80%;
+    text-align: center;
+    padding-top: 40vh;
+    padding-bottom: 80vh;
+}
+
+
+#dragAndDropDialog {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 80%;
+    text-align: center;
+    padding-top: 40vh;
+    padding-bottom: 80vh;
+}
+
+#files {
+    padding-bottom: 10px;
+}
+
 .loggedAsBox {
     /* Box in the top right */
     position: fixed;
@@ -56,6 +95,37 @@ input {
     z-index: 1000;
 }
 
+#sendMessageBox1 {
+    /* Box in the bottom right */
+    bottom: 0;
+    right: 0;
+    background-color: #454545;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    width: 98vw;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#drop_zone {
+    position: absolute;
+    /*border: 5px solid blue;*/
+    width:  95%;
+    height: 95%;
+
+    padding: 0;
+    margin: 0;
+
+    visibility: hidden;
+}
+
+
 #messages {
     /* messages don't touch sendMessageBox */
     padding-bottom: 50px;
@@ -77,4 +147,33 @@ img {
     font-size: 14px;
     color: #fff;
     padding-left: 100px;
+}
+
+.message:hover {
+    background-color: #404040;
+    border-radius: 6px;
+}
+
+#context-menu {
+    list-style: none;
+    position: absolute;
+    background-color: #404040;
+    padding: 20px;
+
+    border-radius: 6px;
+}
+
+#context-menu-item {
+    padding: 5px;
+}
+
+#context-menu-item:hover {
+    border-radius: 6px;
+    background-color: #555555;
+}
+
+#files {
+    background-color: #909090;
+    border-radius: 6px;
+    padding: 5px;
 }

@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Loading DragonMessenger</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Loading DragonMessenger</title>
 </head>
-<body>
-    <div id="root">
-        <!-- Messenger UI -->
-        <!-- Messages, username, send message btn -->
-        <div class="loggedAsBox">
-            <h1>Logged as <input type="text" maxlength="16" id="username" placeholder="Username"></input></h1>
-            <h2>{{ ONLINE_STATUS }} | {{ ROLE_NAME }}</h2>
-        </div>
-        <div id="messages"></div>
-        <input id="sendMessageBox" type="text"></input>
-    </div>
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/main.js"></script>
+<body ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragexit="dragExit();">
+	<div id="root">
+		<div id="context-menu" hidden="">
+			<p id="context-menu-item">Delete message</p>
+			<p id="context-menu-item">Edit message</p>
+			<p id="context-menu-item">Pin message</p>
+			<p id="context-menu-item">Add reaction</p>
+		</div>
+
+		<div id="dragAndDropDialog" hidden="">
+			<h1>Upload files</h1>
+			<p>Drag one or more files to upload</p>
+		</div>
+
+		<div id="cantUploadMore" hidden="">
+			<div id="cantUploadMoreDialog">
+				<h1>Too much files!</h1>
+				<p>You can't upload more than 8 files</p>
+			</div>
+		</div>
+		<!-- Messenger UI -->
+		<!-- Messages, username, send message btn -->
+		<div class="loggedAsBox">
+			<h1>Logged as <input type="text" maxlength="16" id="username" placeholder="Username"></input></h1>
+			<h2>{{ ONLINE_STATUS }} | {{ ROLE_NAME }}</h2>
+		</div>
+		<div id="messages"></div>
+
+
+		<div id="sendMessageBox1">
+			<div id="files"></div>
+			<input id="sendMessageBox" type="text"></input>
+		</div>
+	</div>
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/main.js"></script>
 </body>
 </html>
