@@ -1,0 +1,29 @@
+#message-context-menu,
+#channel-context-menu,
+#member-context-menu {
+	list-style: none;
+	position: absolute;
+	background-color: #111111;
+	padding: 20px;
+
+	border-radius: 6px;
+
+	z-index: 3000;
+}
+
+.message-context-menu-item,
+.channel-context-menu-item,
+.member-context-menu-item {
+	padding: 5px;
+
+	z-index: 3000;
+}
+
+.message-context-menu-item:hover,
+.channel-context-menu-item:hover,
+.member-context-menu-item:hover {
+	border-radius: 6px;
+	background-color: #222222;
+
+	cursor: pointer;
+}

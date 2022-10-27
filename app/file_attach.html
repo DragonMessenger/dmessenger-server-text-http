@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>DragonMessenger</title>
+</head>
+<body>
+	<div id="button-controls" hidden="hidden"></div>
+
+	<div id="root">
+		<form action="/file/attach" method="POST" enctype = "multipart/form-data">
+			<h1>Attach file to message</h1>
+			<input type="text" name="message_id" placeholder="Message ID" required="required">
+			<br>
+			<input type="file" name="file" required="required">
+			<br>
+			<br>
+			<button>Attach file</button>
+		</form>
+		<br>
+		<p>{{ message }}</p>
+	</div>
+
+	<link rel="stylesheet" href="../../css/background.css" async>
+	<link rel="stylesheet" href="../../css/discord/button.css" async>
+	<script src="../../js/isWebpack.js" async></script>
+</body>
+</html>

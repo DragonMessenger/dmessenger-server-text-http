@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>DragonMessenger</title>
+
+	<link rel="stylesheet" href="css/main.css" async>
+	<link rel="stylesheet" href="css/errorScreen.css" async>
+	<link rel="stylesheet" href="css/message.css" async>
+	<link rel="stylesheet" href="css/context-menu.css" async>
+	<link rel="stylesheet" href="css/searchMessages.css" async>
+	<link rel="stylesheet" href="css/settings.css" async>
+	<link rel="stylesheet" href="css/channels.css" async>
+	<link rel="stylesheet" href="css/member.css" async>
+
+	<link rel="stylesheet" href="css/discord/button.css" async>
+	<link rel="stylesheet" href="css/background.css" async>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+	<div id="button-controls" hidden="hidden"></div>
+
+	<div id="root" hidden="hidden">
+		<div id="message-context-menu" hidden="hidden">
+			<p class="message-context-menu-item" onclick="Message.delete(targetID);">Delete message</p>
+			<!-- <p class="message-context-menu-item">Edit message</p> -->
+			<p class="message-context-menu-item" onclick="Message.pin(targetID);">Pin message</p>
+			<p class="message-context-menu-item" onclick="Message.unpin(targetID);">Unpin message</p>
+			<p class="message-context-menu-item" onclick="Message.say(target_content);">Speech a message</p>
+			<p class="message-context-menu-item" id="selected_message_id"></p>
+			<!-- <p class="message-context-menu-item">Add reaction</p> -->
+		</div>
+
+		<div id="channel-context-menu" hidden="hidden">
+			<p class="channel-context-menu-item">Edit channel</p>
+			<p class="channel-context-menu-item">Delete channel</p>
+		</div>
+
+		<div id="member-context-menu" hidden="hidden">
+			<p class="member-context-menu-item" onclick="Channel.deleteMember(target_content);">Delete member activity</p>
+			<p class="member-context-menu-item" onclick="Account.deleteAccount(target_content);">Delete account</p>
+		</div>
+
+		<!-- <div id="dragAndDropDialog" hidden="hidden">
+			<h1>Upload files</h1>
+			<p>Drag one or more files to upload</p>
+		</div>
+
+		<div id="cantUploadMore" hidden="hidden">
+			<div id="cantUploadMoreDialog">
+				<h1>Too much files!</h1>
+				<p>You can't upload more than 8 files</p>
+			</div>
+		</div> -->
+
+		<!-- Messenger UI -->
+		<!-- Logged as -->
+		<!-- <div class="loggedAsBox">
+			<h1>Logged as {{ LOGGED_USERNAME }}</h1>
+			<h2>{{ ONLINE_STATUS }} | {{ ROLE_NAME }}</h2>
+		</div> -->
+
+		<!-- Channels like in Discord -->
+		<div id="channels">
+			<img class="server-icon" src="../attachement/853153353634807809.gif" width="100">
+			<h2>Main</h2>
+			<h3 id="channel" onclick="switchChannel('text', 'if-you-got-ban', 'main_if_you_got_ban_1');">#if-you-got-ban</h3>
+			<h2>Hangout</h2>
+			<h3 id="channel" onclick="switchChannel('text', 'global', 'global_1');">#global</h3>
+			<h3 id="channel" onclick="switchChannel('text', 'discussion-1', 'discussion_1');">#discussion-1</h3>
+			<h3 id="channel" onclick="switchChannel('text', 'discussion-2', 'discussion_2');">#discussion-2</h3>
+			<h3 id="channel" onclick="switchChannel('text', 'offtop', 'offtop_1');">#offtop</h3>
+			<h2>Development</h2>
+			<h3 id="channel" onclick="switchChannel('text', 'server', 'dev_server_1');">#server</h3>
+			<h3 id="channel" onclick="switchChannel('text', 'client', 'dev_client_1');">#client</h3>
+			<h3 id="channel" onclick="switchChannel('text', 'ui', 'dev_ui_1');">#ui</h3>
+			<h3 id="channel" onclick="switchChannel('text', 'desktop', 'dev_desktop_1');">#desktop</h3>
+		</div>
+
+		<!-- Members -->
+		<div id="members"></div>
+		<div id="member-info-popup" hidden="hidden">
+			<!-- <svg class="spinner" viewBox="0 0 50 50">
+				<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+			</svg> -->
+			<div id="member-info-popup-content">
+				<img id="member-avatar" src="https://cdn.discordapp.com/avatars/1000994060313571358/fc52f1b9f5d4084d4f49508315e4120f.png?size=1024" height="100"></img>
+				<div class="avatar-indent"></div>
+				<h1 id="member-info-username">dragonfire</h1>
+				<p>Online</p>
+				<p id="member-info-id">ID: Loading</p>
+				<p id="member-info-role">Role: Loading</p>
+				<p id="member-info-status">Status: Loading</p>
+				<p id="member-info-statusText">Loading</p>
+				<input type="text" placeholder="Click to add a note"></input>
+			</div>
+		</div>
+
+		<!-- Search message and Messages-->
+		<input type="text" id="messages_search" name="messages_search" placeholder="Search"></input>
+		<button id="open_settings_button" onclick="Settings.show();">Open settings</button>
+		<button id="open_pins_button" onclick="PinsUI.toggle();">Pins</button>
+
+		<div id="pins" hidden="hidden"></div>
+
+		<div id="messages"></div>
+
+
+		<!-- Screen sharing -->
+		<!-- <div id="voiceChannel_panel">
+			<h1>Voice test</h1>
+			<video id="webcamSharing" width="1280" height="720"></video>
+		</div> -->
+
+		<!-- Settings -->
+		<div id="settings" class="panel" hidden="hidden">
+			<div class="panel-content">
+				<span id="settings-close" onclick="Settings.hide();">&times;</span>
+
+				<div class="settings-options">
+					<h3 class="header">DragonMessenger</h3>
+					<p class="setting" onclick="Settings.account();">Account</p>
+					<p class="setting" onclick="Settings.about();">About</p>
+					<p class="setting" onclick="Settings.connections();">Connections (Beta)</p>
+					<p class="setting" onclick="Settings.settings();">Settings</p>
+					<p class="setting" onclick="Settings.debug();">Debug</p>
+					<p class="setting" onclick="Settings.experiments();">Experiments</p>
+				</div>
+				<div id="settings-options">
+					<h1>DragonMessenger</h1>
+					<p>Select option</p>
+					<p id="electron-version"></p>
+				</div>
+			</div>
+		</div>
+
+		<div id="keyBinds" class="panel" hidden="hidden">
+			<div class="panel-content">
+				<span id="settings-close" onclick="document.getElementById('keyBinds').hidden = !document.getElementById('keyBinds').hidden;">&times;</span>
+
+				<h1>Keybinds (Beta)</h1>
+				<h2>Show keybinds modal</h2>
+				<p>Ctrl + /</p>
+				<h2>Focus on search</h2>
+				<p>Alt + F</p>
+			</div>
+		</div>
+
+		<!-- Send message -->
+		<div id="sendMessageBox1">
+			<div id="files"></div>
+			<input id="sendMessageBox" type="text" placeholder="Write something in the #global, or say hello!"></input>
+		</div>
+	</div>
+
+	<div id="errorScreen" hidden="hidden">
+		<h1>Wait, something went wrong...</h1>
+		<p>DragonMessenger has been crashed.</p>
+		<p>To prevent virus activity, we set all variables to null to prevent malicious code from accessing the data</p>
+		<button onclick="window.location.reload();">Reload</button>
+	</div>
+
+	<div id="accountBlocked" hidden="hidden">
+		<h1>Account blocked</h1>
+		<p>You are blocked on this server. Contact the server owner.</p>
+	</div>
+
+	<div id="channelEdit" hidden="hidden">
+		<div id="channelEdit-content">
+			<h1>Overview</h1>
+			<input type="text" id="channelName" placeholder="Channel name">
+			<br>
+			<input type="text" id="channelTopic" placeholder="Channel topic">
+			<br><br>
+			<button>Save changes</button>
+		</div>
+	</div>
+
+	<div id="loadingScreen">
+		<svg class="spinner" viewBox="0 0 50 50">
+			<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+		</svg>
+		<br><br><br>
+		<h1 id="loadingScreen-title">Did you know</h1>
+		<p id="loadingScreen-description">You can pin messages like Telegram or Discord.</p>
+		<p id="loadingScreen-problems">Connection problems? Let us know!</p>
+	</div>
+
+	<!-- 	<div id="verifyRequired">
+		<h1>Verify required</h1>
+		<p>We found suspicious activity on your account. To continue using DragonMessenger, verify your account.</p>
+		<button onclick="startAccountChecking();">Start checking the account</button>
+
+		<div id="verifyScreen" hidden="hidden">
+			<div class="settings-content">
+				<h1>Enter your Email</h1>
+				<p>We're sending an email with a link to verify. Just click on this link and you're done</p>
+				<input type="email" id="verify_email_input" placeholder="Enter your email">
+				<br>
+				<button onclick="sendVerifyEmail();">Done</button>
+			</div>
+		</div>
+	</div> -->
+
+	<script src="js/main.js" async></script>
+	
+	<script src="js/Account.js" async></script>
+	<script src="js/Channel.js" async></script>
+	<script src="js/Connections.js" async></script>
+	<script src="js/User.js" async></script>
+	<script src="js/Message.js" async></script>
+
+	<script src="js/getUsername.js" async></script>
+	<script src="js/postActivity.js" async></script>
+	<script src="js/removeActivity.js" async></script>
+	<script src="js/pins.js" async></script>
+	<script src="js/dynamicSearchAPI.js" async></script>
+	<script src="js/settings.js" async></script>
+
+	<script src="js/onload.js" async></script>
+	
+	<script src="js/isWebpack.js" async></script>
+
+	<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

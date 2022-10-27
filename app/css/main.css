@@ -1,9 +1,14 @@
+@import url("../../css/titleBar.css");
+
 body {
-    background-color: #2b2b2b;
+	background-color: #000000;
+
+	overflow-x: hidden;
 }
 
 * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	/*border: 1px solid #f00;*/
 }
 
 h1,
@@ -13,68 +18,374 @@ h4,
 h5,
 h6,
 p {
-    color: #fff;
-}
+		color: #fff;
+	}
 
 input {
-    padding: 0;
-    border: 0;
-    border-radius: 3px;
-    background-color: #707070;
-    color: white;
+	padding: 0;
+	border: 0;
+	border-radius: 3px;
+	background-color: #707070;
+	color: white;
+}
+
+#dragAndDropArea {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+}
+
+#cantUploadMore {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+}
+
+#cantUploadMoreDialog {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 80%;
+	text-align: center;
+	padding-top: 40vh;
+	padding-bottom: 80vh;
+}
+
+
+#dragAndDropDialog {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 80%;
+	text-align: center;
+	padding-top: 40vh;
+	padding-bottom: 80vh;
 }
 
 .loggedAsBox {
-    /* Box in the top right */
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #454545;
-    padding: 10px;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
+	/* Box in the top right */
+	position: fixed;
+	top: 15px;
+	right: 125px;
+	background-color: #454545;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	z-index: 1000;
 }
 
 #sendMessageBox {
-    /* Box in the bottom right */
-    bottom: 0;
-    right: 0;
-    background-color: #454545;
-    padding: 10px;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    width: 98vw;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+	/* Box in the bottom right */
+	bottom: 0;
+	right: 0;
+	background-color: #111111;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	width: 98vw;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
 }
+
+#sendMessageBox1 {
+	/* Box in the bottom right */
+	bottom: 0;
+	right: 0;
+	background-color: #111111;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	width: 98vw;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+}
+
+#drop_zone {
+	position: absolute;
+	/*border: 5px solid blue;*/
+	width:	95%;
+	height: 95%;
+
+	padding: 0;
+	margin: 0;
+
+	visibility: hidden;
+}
+
 
 #messages {
-    /* messages don't touch sendMessageBox */
-    padding-bottom: 50px;
+	/* messages don't touch sendMessageBox */
+	position: relative;
+	padding-bottom: 50px;
+	padding-left: 145px;
 }
 
-img {
-    position: fixed;
+img:not(.server-icon, .emoji) {
+	height: 30vh;
+	/*width: 20vw;*/
+	
+	/*background: url("../js/919143455148613663.gif") no-repeat;*/
 }
+
+.emoji {
+	position: relative;
+	width: 1em;
+	height: 1em;
+}
+
+.server-icon {
+	border-radius: 6px;
+}
+
+/*img {
+	position: fixed;
+}*/
 
 .about-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 10px;
-    padding-left: 100px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	margin-bottom: 10px;
+	padding-left: 100px;
 }
 
 .about-description {
-    font-size: 14px;
-    color: #fff;
-    padding-left: 100px;
+	font-size: 14px;
+	color: #fff;
+	padding-left: 100px;
+}
+
+#files {
+	background-color: #909090;
+	border-radius: 6px;
+	padding: 5px;
+	padding-bottom: 10px;
+}
+
+
+
+
+
+#open_settings_button {
+	position: fixed;
+	background-color: #111111;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	z-index: 1000;
+	top: 15px;
+	right: 700px;
+	width: 20px;
+}
+
+#open_pins_button {
+	position: fixed;
+	background-color: #111111;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	z-index: 1000;
+	top: 15px;
+	right: 900px;
+	width: 20px;
+}
+
+#pins {
+	position: fixed;
+	background-color: #111111;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	z-index: 1000;
+	top: 65px;
+	right: 800px;
+	min-width: 150px;
+}
+
+
+
+
+
+
+.pluginCard {
+	background-color: #484848;
+	border-radius: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+
+
+
+@media screen and (min-width: 0px) and (max-width: 800px) {
+	.loggedAsBox { display: none; }
+	#open_settings_button { right: 400px; }
+	#messages_search { right: 215px; }
+}
+
+@media screen and (min-width: 0px) and (max-width: 600px) {
+	#channels { display: none; }
+	#open_settings_button { display: none; }
+	#messages_search { display: none; }
+	#members { display: none; }
+}
+
+/*
+:focus {
+	outline: 3px solid deepskyblue;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+.avatar-indent {
+	padding-top: 90px;
+}
+
+
+
+
+/*
+if (navigator.mediaDevices) {
+  navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+  .then(function onSuccess(stream) {
+	console.log(stream)
+    var video = document.getElementById('webcamSharing');
+    video.autoplay = true;
+    video.srcObject = stream;
+  })
+  .catch(function onError() {
+    alert('There has been a problem retreiving the streams - are you running on file:/// or did you disallow access?');
+  });
+} else {
+  alert('getUserMedia is not supported in this browser.');
+}
+*/
+
+
+
+#voiceChannel_panel {
+	padding-bottom: 50px;
+	padding-left: 120px;
+	z-index: 9000;
+}
+
+
+
+
+
+
+
+
+
+.spinner {
+	animation: rotate 2s linear infinite;
+	z-index: 2;
+	position: absolute;
+	margin: -25px 0 0 -25px;
+	width: 50px;
+	height: 50px;
+
+	margin-top: 3px;
+	margin-left: 1px;
+}
+.spinner .path {
+	stroke: white;
+	stroke-linecap: round;
+	animation: dash 1.5s ease-in-out infinite;
+}
+@keyframes rotate {
+	100% {
+		transform: rotate(360deg);
+   }
+}
+@keyframes dash {
+	0% {
+		stroke-dasharray: 1, 150;
+		stroke-dashoffset: 0;
+   }
+	50% {
+		stroke-dasharray: 90, 150;
+		stroke-dashoffset: -35;
+   }
+	100% {
+		stroke-dasharray: 90, 150;
+		stroke-dashoffset: -124;
+   }
+}
+
+
+
+
+
+
+
+#file {
+	background-color: #111111;
+	border-radius: 6px;
+	padding: 6px;
+}
+
+
+
+
+/*
+#loadingScreen,
+#settings,
+#keyBinds {
+	animation: fadeIn;
+	animation-duration: 0.5s;
+}
+*/
+
+.invite-body {
+	/*background-color: #222222;*/
+	background: url("../assets/invite");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	background-size: 100% auto;
+}
+
+.invite-box {
+	background-color: #000000;
+	position: fixed;
+	z-index: 10000;
+	left: 10vw;
+	top: 50vh;
+	text-align: center;
+	padding: 12px;
+	border-radius: 6px;
+	
+	-webkit-box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }

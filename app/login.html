@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>DragonMessenger</title>
+</head>
+<body>
+	<div id="button-controls" hidden="hidden"></div>
+
+	<div id="root">
+		<form action="/api/auth/login" method="POST">
+			<h1>Login to DragonMessenger</h1>
+			<input type="text" name="username" placeholder="Username" required="required">
+			<br>
+			<input type="password" name="password" placeholder="Password" required="required">
+			<br>
+			<input type="text" name="2faCode" placeholder="2fa code">
+			<br>
+			<input type="checkbox" name="isBrowser" checked="checked" hidden="hidden">
+			<br>
+			<br>
+			<button>Login</button>
+		</form>
+		<br>
+		<button onclick="window.location.href = '../register'">New in DragonMessenger? Register</button>
+		<button onclick="window.location.href = '../api/auth/login/discord'">Login with Discord</button>
+	</div>
+
+	<link rel="stylesheet" href="../../css/background.css" async>
+	<link rel="stylesheet" href="../../css/discord/button.css" async>
+	<script src="../../js/isWebpack.js" async></script>
+</body>
+</html>

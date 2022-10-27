@@ -1,0 +1,21 @@
+/* Search input*/
+#messages_search {
+	position: fixed;
+	background-color: #111111;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	z-index: 1000;
+	top: 15px;
+	right: 415px;
+	width: 120px;
+
+	transition: width 0.6s ease-in-out;
+}
+
+
+#messages_search:focus {
+	width: 240px;
+}

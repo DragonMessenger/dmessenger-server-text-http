@@ -1,0 +1,11 @@
+/* Message */
+.message {
+	margin-right: 350px;
+	padding: 0;
+	border: 0;
+}
+
+.message:hover {
+	background-color: #131313;
+	border-radius: 6px;
+}

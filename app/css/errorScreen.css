@@ -1,0 +1,13 @@
+/* Error screen */
+#errorScreen,
+#accountBlocked,
+#verifyRequired,
+#loadingScreen {
+	padding-top: 50vh;
+	text-align: center;
+}
+
+#loadingScreen-problems {
+    position: absolute;
+    bottom: 0;
+}
